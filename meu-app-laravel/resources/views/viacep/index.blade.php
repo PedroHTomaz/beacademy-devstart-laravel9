@@ -8,7 +8,7 @@
 </head>
 <body>
     <div>
-        <form action="{{ route('viacep.index.post') }}" method="post">
+        <form action="{{ route('viacep.index.post') }}" method="POST">
             @csrf
             <input type="text" name="cep">
             <button type="submit">ENVIAR</button>
