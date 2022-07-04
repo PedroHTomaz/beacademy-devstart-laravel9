@@ -13,20 +13,24 @@
 
     @endif
 
-    <form action="{{ route('users.store') }}" method="POST">
+    <form action="{{ route('users.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
-      <div class="mb-3">
-        <label for="name">NOME</label>
-        <input type="text" class="form-control" id="name" name="name" aria-describedby="nome">
-      </div>
-      <div class="mb-3">
-        <label for="email">EMAIL</label>
-        <input type="email" class="form-control" id="email" name="email">
-      </div>
-      <div class="mb-3">
-        <label for="password">SENHA</label>
-        <input type="password" class="form-control" id="password" name="password">
-      </div>
-      <button type="submit" class="btn btn-primary">ENVIAR</button>
+        <div class="mb-3">
+          <label for="name">NOME</label>
+          <input type="text" class="form-control" id="name" name="name" aria-describedby="nome">
+        </div>
+        <div class="mb-3">
+          <label for="email">EMAIL</label>
+          <input type="email" class="form-control" id="email" name="email">
+        </div>
+        <div class="mb-3">
+          <label for="password">SENHA</label>
+          <input type="password" class="form-control" id="password" name="password">
+        </div>
+        <div class="mb-3">
+          <label for="image" class="form-label">Selecione uma imagem</label>
+          <input type="file" class="form-control form control md" id="image" name="image">
+        </div>
+        <button type="submit" class="btn btn-primary">ENVIAR</button>
     </form>
 @endsection
