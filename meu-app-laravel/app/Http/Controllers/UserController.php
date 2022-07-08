@@ -13,22 +13,24 @@ class UserController extends Controller
         $this->model = $user;
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        $users = User::all();
+        $users = $this->model->getUsers(
+            $request->search ?? ''
+        );
+
+        $users = User::paginate(5);
 
         return view('users.index', compact('users'));
     }
 
     public function show($id)
     {
-        if(!$user = User::find($id)) {
+        if(!$user = User::findOrFail($id)) {
             return redirect()->route('users.index');
         }
 
-        $title = 'Usuário' . $user->name;
-
-        return view('users.show', compact('user', 'title'));
+        return view('users.show', compact('user'));
     }
 
     public function create()
@@ -47,9 +49,11 @@ class UserController extends Controller
         $data = $request->all();
         $data['password'] = bcrypt($request->password);
 
-        $file = $request['image'];
-        $path = $file->store('profile', 'public');
-        $data['image'] = $path;
+        if($request->image){
+            $file = $request['image'];
+            $path = $file->store('profile', 'public');
+            $data['image'] = $path; 
+        }
 
         $this->model->create($data);
 
