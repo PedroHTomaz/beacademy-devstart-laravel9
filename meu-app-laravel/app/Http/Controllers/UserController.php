@@ -26,11 +26,17 @@ class UserController extends Controller
 
     public function show($id)
     {
-        if(!$user = User::findOrFail($id)) {
-            return redirect()->route('users.index');
-        }
+        // if(!$user = User::findOrFail($id)) {
+        //     return redirect()->route('users.index');
+        // }
 
-        return view('users.show', compact('user'));
+        $user = User::find($id);
+
+        if($user){
+            return view('users.show', compact('user'));
+        } else {
+            throw new UserControllerException('Usuário não encontrado.');
+        }
     }
 
     public function create()
@@ -57,7 +63,7 @@ class UserController extends Controller
 
         $this->model->create($data);
 
-        return redirect()->route('users.index');
+        return redirect()->route('users.index')->with('create', 'Pronto! Usuário cadastrado com sucesso.');
     }
 
     public function edit($id)
@@ -78,10 +84,13 @@ class UserController extends Controller
         $data = $request->only('name', 'email');
         if($request->password){
             $data['password'] = bcrypt($request->password);
+        } else {
+            $data['is_admin'] = $request->admin ? 1 : 0;
         }
 
         $user->update($data);
-        return redirect()->route('users.index');
+
+        return redirect()->route('users.index')->with('edit', 'Pronto! Usuário atualizado com sucesso.');
     }
 
     public function destroy($id)
@@ -92,7 +101,7 @@ class UserController extends Controller
 
         $user->delete();
 
-        return redirect()->route('users.index');
+        return redirect()->route('users.index')->with('destroy', 'Pronto! Usuário excluido com sucesso.');
     }
 
     public function admin()
