@@ -63,7 +63,7 @@ class UserController extends Controller
 
         $this->model->create($data);
 
-        return redirect()->route('users.index')->with('create', 'Pronto! Usuário cadastrado com sucesso.');
+        return redirect()->route('users.index')->with('create', 'Usuário cadastrado com sucesso.');
     }
 
     public function edit($id)
@@ -90,7 +90,7 @@ class UserController extends Controller
 
         $user->update($data);
 
-        return redirect()->route('users.index')->with('edit', 'Pronto! Usuário atualizado com sucesso.');
+        return redirect()->route('users.index')->with('edit', 'Usuário atualizado com sucesso.');
     }
 
     public function destroy($id)
@@ -101,7 +101,7 @@ class UserController extends Controller
 
         $user->delete();
 
-        return redirect()->route('users.index')->with('destroy', 'Pronto! Usuário excluido com sucesso.');
+        return redirect()->route('users.index')->with('destroy', 'Usuário excluido com sucesso.');
     }
 
     public function admin()

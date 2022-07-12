@@ -13,7 +13,7 @@
 
   @endif
 
-<form action="{{ route('users.update') }}" method="POST" enctype="multipart/form-data">
+<form action="{{ route('users.update', $user->id) }}" method="POST" enctype="multipart/form-data">
     @method('PUT')
     @csrf
   <div class="mb-3">
@@ -34,7 +34,7 @@
   </div>
   <div class="form-check mb-5">
     <input class="form-check-input" type="checkbox" value="1" id="admin" name="admin">
-    <label class="form-check-label" for="admin">Default checkbox</label>
+    <label class="form-check-label" for="admin">Admin</label>
   </div>
   <button type="submit" class="btn btn-primary">ATUALIZAR</button>
 </form>
